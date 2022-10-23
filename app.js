@@ -75,8 +75,9 @@ app.get("/", (req, res) => {
 //Posting to database
 app.post('/api/v1/tour',async(req,res,next)=>{
 try {
-    const tour = new Tour(req.body)
-    const result= await tour.save()
+    const result= await Tour.create(req.body)
+    // const tour = new Tour(req.body)
+    // const result= await tour.save()
     res.status(200).json({
         status:'success',
         message:'Tour inserted successfully',
@@ -90,7 +91,6 @@ try {
     })
 }
 
- 
 })
 
  module.exports = app;
