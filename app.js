@@ -1,18 +1,18 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const {mongoose} = require("mongoose");
+const mongoose = require("mongoose");
 
 //middleware
 app.use(express.json());
 app.use(cors());
 
 //schema design
-const productSchema = mongoose.Schema({
+const TourSchema = mongoose.Schema({
 
 name:{
 type: String,
-required:[true,"Please provide a name for this product"],
+required:[true,"Please provide a name for this tour"],
 trim:true,
 unique: [true,"Name must be unique"],
 minLength:[3,"Name must be at least 3 character"],
@@ -63,6 +63,8 @@ status:{
 })
 
 //SCHEMA =>MODEL=>Query
+
+const Tour = mongoose.model('Tour',TourSchema)
 
 //routes
 // const productRoute = require('./routes/product.route')
