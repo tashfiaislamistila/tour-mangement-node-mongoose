@@ -67,13 +67,30 @@ status:{
 const Tour = mongoose.model('Tour',TourSchema)
 
 //routes
-// const productRoute = require('./routes/product.route')
 
 app.get("/", (req, res) => {
   res.send("Route is working! YaY!");
 });
 
 //Posting to database
-// app.use('/api/v1/tour',productRoute)
+app.post('/api/v1/tour',async(req,res,next)=>{
+try {
+    const tour = new Tour(req.body)
+    const result= await tour.save()
+    res.status(200).json({
+        status:'success',
+        message:'Tour inserted successfully',
+        data:result
+    }) 
+} catch (error) {
+    res.status(400).json({
+        status:'fail',
+        message:'Tour is not inserted',
+        error:error.message
+    })
+}
+
+ 
+})
 
  module.exports = app;
