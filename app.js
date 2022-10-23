@@ -9,6 +9,7 @@ app.use(cors());
 
 //schema design
 const productSchema = mongoose.Schema({
+
 name:{
 type: String,
 required:[true,"Please provide a name for this product"],
@@ -27,6 +28,7 @@ type:Number,
 require:true,
 min:[0,"Price can be negative"],
 },
+
 quantity:{
   type:Number,
     required:true,
@@ -43,14 +45,24 @@ quantity:{
     },
     message:"Quantity must be an integer"
 },
+
 image: {
     type: String,
     required: [true, "Please provide a image url for this product."],
 },
-
+status:{
+    type: String,
+    required:true,
+    enum:{
+     values:   ["Available","Not-available"],
+    message:"Status can not be{VALUE}"
+    }
+}
+},{
+    timeStamps:true,
 })
 
-
+//SCHEMA =>MODEL=>Query
 
 //routes
 // const productRoute = require('./routes/product.route')
