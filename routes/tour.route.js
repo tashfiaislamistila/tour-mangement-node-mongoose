@@ -9,7 +9,8 @@ router.route('/')
 .get(tourControllers.getTours)
 .post(tourControllers.createTour)
 
-// router.route("/:id")
+ router.route("/:id")
+ .get(tourControllers.getTourByID)
 // .patch(productController.updateProductById)
 // .delete(productController.deleteProductById)
 
