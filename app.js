@@ -90,7 +90,6 @@ tourSchema.methods.logger= function(){
 const Tour = mongoose.model('Tour',tourSchema)
 
 //routes
-
 app.get("/", (req, res) => {
   res.send("Route is working! YaY!");
 });
@@ -112,7 +111,24 @@ try {
         error:error.message
     })
 }
+})
 
+app.get("/api/v1/tour",async(req,res,next)=>{
+    try {
+        const tours=await Tour.find({});
+        res.status(200).json({
+            status:"success",
+            data:tours
+        })
+        
+    } catch (error) {
+        res.status(400).json({
+            status:"fail",
+            message:"Cannot get the tour",
+            error:error.message,
+
+        })
+    }
 })
 
  module.exports = app;
