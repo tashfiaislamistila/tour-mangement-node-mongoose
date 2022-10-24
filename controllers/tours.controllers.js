@@ -1,6 +1,9 @@
+const { createTourService } = require("../services/tour.services")
+
+
 exports.createProduct = async(req,res,next)=>{
     try {
-        const result= await Tour.create(req.body)
+        const result= await createTourService(req.body)
         result.logger()
         res.status(200).json({
             status:'success',
