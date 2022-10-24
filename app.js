@@ -13,28 +13,14 @@ app.use(viewCount);
 
 
 //routes
+const tourRoute=require('./routes/tour.route')
+
 app.get("/", (req, res) => {
   res.send("Route is working! YaY!");
 });
 
 //Posting to database
-app.post('/api/v1/tour',async(req,res,next)=>{
-try {
-    const result= await Tour.create(req.body)
-    result.logger()
-    res.status(200).json({
-        status:'success',
-        message:'Tour inserted successfully',
-        data:result
-    }) 
-} catch (error) {
-    res.status(400).json({
-        status:'fail',
-        message:'Tour is not inserted',
-        error:error.message
-    })
-}
-})
+app.use('/api/v1/tour',tourRoute)
 
 app.get("/api/v1/tour",async(req,res,next)=>{
     try {
