@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 //schema design
-const TourSchema = mongoose.Schema({
+const tourSchema = mongoose.Schema({
 
 name:{
 type: String,
@@ -57,14 +57,29 @@ status:{
      values:   ["Available","Not-available"],
     message:"Status can not be{VALUE}"
     }
+},
+viewCount: {
+    type:Number
 }
-},{
+},
+{
     timeStamps:true,
 })
 
+//mongoose middleware for saving data: pre/post 
+
+tourSchema.pre('save',function(next){
+    console.log('Before saving data');
+    next()
+})
+
+tourSchema.post('save',function(doc,next){
+    console.log('After saving data'); 
+    next()
+})
 //SCHEMA =>MODEL=>Query
 
-const Tour = mongoose.model('Tour',TourSchema)
+const Tour = mongoose.model('Tour',tourSchema)
 
 //routes
 
@@ -78,6 +93,9 @@ try {
     const result= await Tour.create(req.body)
     // const tour = new Tour(req.body)
     // const result= await tour.save()
+    // if(Tour.quantity==0){
+    //     Tour.status='out-of-stock'
+    // }
     res.status(200).json({
         status:'success',
         message:'Tour inserted successfully',
