@@ -1,0 +1,1 @@
+(*) POST/tour/save - http://localhost:8000/api/v1/tour (Save a tour in mongoose).

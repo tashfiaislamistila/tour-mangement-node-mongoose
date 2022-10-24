@@ -70,13 +70,17 @@ viewCount: {
 
 tourSchema.pre('save',function(next){
     console.log('Before saving data');
+    if(this.quantity == 0){
+      this.status='Not Available'
+    }
     next()
 })
 
-tourSchema.post('save',function(doc,next){
-    console.log('After saving data'); 
-    next()
-})
+    
+tourSchema.methods.logger= function(){
+    console.log(`Tour saved for ${this.name}`);
+  }
+
 //SCHEMA =>MODEL=>Query
 
 const Tour = mongoose.model('Tour',tourSchema)
@@ -91,11 +95,7 @@ app.get("/", (req, res) => {
 app.post('/api/v1/tour',async(req,res,next)=>{
 try {
     const result= await Tour.create(req.body)
-    // const tour = new Tour(req.body)
-    // const result= await tour.save()
-    // if(Tour.quantity==0){
-    //     Tour.status='out-of-stock'
-    // }
+    result.logger()
     res.status(200).json({
         status:'success',
         message:'Tour inserted successfully',
