@@ -2,10 +2,13 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
+const viewCount = require("./middleware/viewcount");
 
 //middleware
 app.use(express.json());
 app.use(cors());
+
+app.use(viewCount);
 
 //schema design
 const tourSchema = mongoose.Schema({
@@ -75,6 +78,7 @@ tourSchema.pre('save',function(next){
     }
     next()
 })
+
 
     
 tourSchema.methods.logger= function(){
