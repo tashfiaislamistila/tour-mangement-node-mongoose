@@ -1,5 +1,5 @@
 
-const { createTourService, getTourService,getTourServiceById,updateTourServiceById,getCheapestService } = require("../services/tour.services")
+const { createTourService, getTourService,getTourServiceById,updateTourServiceById,getCheapestService,getTrendingService } = require("../services/tour.services")
 
 exports.getTours=async(req,res,next)=>{
     try {
@@ -40,7 +40,6 @@ exports.getTourByID = async(req,res,next)=>{
 
 exports.getCheapestTour = async(req,res,next)=>{
     try {
-        // const tours = await Tour.find({ price: { $lte:3000 } });
          const tours=await getCheapestService();
         res.status(200).json({
             status:"successfully get the cheapest tour",
@@ -50,6 +49,21 @@ exports.getCheapestTour = async(req,res,next)=>{
         res.status(400).json({
             status:"fail",
             message:"Can not get the cheapest tour",
+            error:error.message,  
+    })
+}
+}
+exports.getTrendingTour= async(req,res,next) => {
+    try {
+        const tours=await getTrendingService();
+        res.status(200).json({
+            status:"successfully get the trending tour",
+            data: tours
+        }) 
+    } catch (error) {
+        res.status(400).json({
+            status:"fail",
+            message:"Can not get the trending tour",
             error:error.message,  
     })
 }

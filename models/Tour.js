@@ -68,8 +68,6 @@ const tourSchema = mongoose.Schema({
         next()
     })
     
-    
-        
     tourSchema.methods.logger= function(){
         console.log(`Tour saved for ${this.name}`);
       }
