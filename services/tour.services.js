@@ -10,6 +10,11 @@ const Tour = require('../models/Tour');
     return tours;
     }
 
+exports.getCheapestService = async()=>{
+    const tours = await Tour.find({}).limit(3).sort({price:1});
+    return tours;
+}
+
 exports.updateTourServiceById = async (id,data) =>{
         const tours = await Tour.updateOne(
             {_id: id}, { $set: data }, {runValidators:true}
