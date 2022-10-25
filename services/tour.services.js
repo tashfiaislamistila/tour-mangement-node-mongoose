@@ -11,7 +11,9 @@ const Tour = require('../models/Tour');
     }
 
 exports.updateTourServiceById = async (id,data) =>{
-        const tours = await Tour.updateOne({_id: id}, { $set: data });
+        const tours = await Tour.updateOne(
+            {_id: id}, { $set: data }, {runValidators:true}
+            );
         return tours;
         }
 
