@@ -1,5 +1,4 @@
-
-const { createTourService, getTourService,getTourServiceById } = require("../services/tour.services")
+const { createTourService, getTourService,getTourServiceById,updateTourServiceById } = require("../services/tour.services")
 
 exports.getTours=async(req,res,next)=>{
     try {
@@ -38,6 +37,23 @@ exports.getTourByID = async(req,res,next)=>{
     }
 }
 
+exports.updateTourById= async(req,res,next)=>{
+    try {
+        const {id}=req.params;
+        const result=await updateTourServiceById(id,req.body);
+        res.status(200).json({
+            status:"successfully updated the tour by id",
+            data:result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status:"fail",
+            message:"Can not update the tour by ID",
+            error:error.message,
+
+        }) 
+    }
+}
 
 exports.createTour = async(req,res,next)=>{
     try {

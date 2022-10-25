@@ -2,13 +2,13 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
-const viewCount = require("./middleware/viewcount");
+// const viewCount = require("./middleware/viewcount");
 
 //middleware
 app.use(express.json());
 app.use(cors());
 
-app.use(viewCount);
+// app.use(viewCount);
 
 
 //routes

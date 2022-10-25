@@ -10,6 +10,11 @@ const Tour = require('../models/Tour');
     return tours;
     }
 
+exports.updateTourServiceById = async (id,data) =>{
+        const tours = await Tour.updateOne({_id: id}, { $set: data });
+        return tours;
+        }
+
 
 exports.createTourService = async(data)=>{
     const tour = await Tour.create(data);
