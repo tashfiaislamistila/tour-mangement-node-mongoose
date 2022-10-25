@@ -2,12 +2,12 @@
   "name": "tour-management-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "engines": {
     "node":"14.x"
   },
   "scripts": {
-    "start": "node server",
+    "start": "node app.js",
     "dev": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
